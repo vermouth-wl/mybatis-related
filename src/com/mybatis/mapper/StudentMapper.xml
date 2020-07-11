@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.mapper.StudentMapper">
+
+    <!-- 根据学生id查询学生信息 -->
+    <select id="findStudentById" parameterType="int" resultMap="studentMap">
+        select * from userinfo t where t.id = #{id}
+    </select>
+
+    <!-- 对象映射属性 -->
+    <resultMap id="studentMap" type="Student">
+        <id property="id" column="id"/>
+        <result property="userCode" column="user_code"/>
+        <result property="userName" column="user_name"/>
+        <result property="name" column="name"/>
+        <result property="email" column="email"/>
+        <result property="name" column="name"/>
+        <result property="phone" column="phone"/>
+        <result property="address" column="address"/>
+        <result property="regDate" column="regDate"/>
+        <result property="status" column="status"/>
+
+        <!-- 一对一关联映射 -->
+        <association property="classId" column="class_id"
+                     select="com.mybatis.mapper.ClassMapper.findClassById" javaType="Clazz"/>
+    </resultMap>
+
+    <!-- 根据班级id查询出对应学生 -->
+    <select id="findStudentByClassId" parameterType="int" resultMap="classStudentMap">
+        select * from userinfo t where t.class_id = #{clazzId}
+    </select>
+    <!-- 使用resultMap属性映射结果 -->
+    <resultMap id="classStudentMap" type="Student">
+        <id property="id" column="id"/>
+        <result property="userCode" column="user_code"/>
+        <result property="userName" column="user_name"/>
+        <result property="name" column="name"/>
+        <result property="email" column="email"/>
+        <result property="name" column="name"/>
+        <result property="phone" column="phone"/>
+        <result property="address" column="address"/>
+        <result property="regDate" column="regDate"/>
+        <result property="status" column="status"/>
+    </resultMap>
+</mapper>

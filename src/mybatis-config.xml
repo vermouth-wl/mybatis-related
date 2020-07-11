@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!-- 加载属性文件 -->
+    <properties resource="db.properties"/>
+
+    <!-- 给包中的类注册别名 -->
+    <typeAliases>
+        <package name="com.mybatis.pojo"/>
+    </typeAliases>
+
+    <!-- 配置环境 -->
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 引用配置文件 -->
+    <mappers>
+        <mapper resource="com/mybatis/mapper/IdcardMapper.xml"/>
+        <mapper resource="com/mybatis/mapper/PersonMapper.xml"/>
+        <mapper resource="com/mybatis/mapper/StudentMapper.xml"/>
+        <mapper resource="com/mybatis/mapper/ClassMapper.xml"/>
+    </mappers>
+</configuration>

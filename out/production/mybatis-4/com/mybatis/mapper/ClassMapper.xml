@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.mapper.ClassMapper">
+    <!-- 根据id查询班级信息 -->
+    <select id="findClassById" parameterType="int" resultMap="classMap">
+        select * from class t where t.id = #{id}
+    </select>
+    <!-- 设置对象映射属性 -->
+    <resultMap id="classMap" type="Clazz">
+        <id property="id" column="id"/>
+        <result property="clazzCode" column="class_code"/>
+        <result property="clazzName" column="class_name"/>
+    </resultMap>
+
+    <!-- 根据学生班级id查询出学生信息 -->
+    <select id="findClassStudentById" resultMap="classStudentMap" parameterType="int">
+        select * from class t where t.id = #{id}
+    </select>
+    <!-- 设置对象映射属性 -->
+    <resultMap id="classStudentMap" type="Clazz">
+        <id property="id" column="id"/>
+        <result property="clazzCode" column="class_code"/>
+        <result property="clazzName" column="class_name"/>
+
+        <!-- 一对多关联映射 -->
+        <collection property="studentList" column="id" select="com.mybatis.mapper.StudentMapper.findStudentByClassId"/>
+    </resultMap>
+</mapper>
