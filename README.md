@@ -1,4 +1,7 @@
 # mybatis关联查询
-> mybatis关联（包括一对一、一对多、多对多多种关联方式）
 
->> 一堆一
+> 一对一映射
+  在mapper文件中添加<association>元素
+  
+> 一对多映射
+  在mapper文件中添加<collection>元素
