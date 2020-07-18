@@ -14,6 +14,8 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -68,6 +70,17 @@ public class StudentTest {
         // 调用接口方法
         Clazz clazz = classMapper.findClassStudentById(4);
         System.out.println(clazz.studentInfo());
+    }
+
+    // 一对多嵌套结果查询测试方法
+    @Test
+    public void findClassStudentById2() {
+        // 获取接口代理对象
+        //ClassMapper classMapper = sqlSession.getMapper(ClassMapper.class);
+        List<Clazz> clazzList = sqlSession.selectList("findClassStudentById2", 4);
+        // 调用接口方法
+        //Clazz clazz = classMapper.findClassStudentById2(4);
+        clazzList.forEach(e -> System.out.println(e.studentInfo() + " "));
     }
 
     @After

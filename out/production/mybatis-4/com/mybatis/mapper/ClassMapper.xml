@@ -12,7 +12,7 @@
         <result property="clazzName" column="class_name"/>
     </resultMap>
 
-    <!-- 根据学生班级id查询出学生信息 -->
+    <!-- 嵌套查询，根据班级id查询出学生信息 -->
     <select id="findClassStudentById" resultMap="classStudentMap" parameterType="int">
         select * from class t where t.id = #{id}
     </select>
@@ -24,5 +24,29 @@
 
         <!-- 一对多关联映射 -->
         <collection property="studentList" column="id" select="com.mybatis.mapper.StudentMapper.findStudentByClassId"/>
+    </resultMap>
+
+    <!-- 使用嵌套结果查询方式实现一对多关联查询 -->
+    <select id="findClassStudentById2" parameterType="int" resultMap="classStudentMap2">
+        select t1.class_code, t1.class_name, t2.* from class t1, userinfo t2 where t1.id = t2.class_id and t1.id = #{id}
+    </select>
+    <resultMap id="classStudentMap2" type="Clazz">
+        <id property="id" column="id"/>
+        <result property="clazzCode" column="class_code"/>
+        <result property="clazzName" column="class_name"/>
+
+        <!-- 一对多关联映射查询 -->
+        <collection property="studentList" ofType="Student">
+            <id property="id" column="id"/>
+            <result property="userCode" column="user_code"/>
+            <result property="userName" column="user_name"/>
+            <result property="name" column="name"/>
+            <result property="email" column="email"/>
+            <result property="name" column="name"/>
+            <result property="phone" column="phone"/>
+            <result property="address" column="address"/>
+            <result property="regDate" column="regDate"/>
+            <result property="status" column="status"/>
+        </collection>
     </resultMap>
 </mapper>
