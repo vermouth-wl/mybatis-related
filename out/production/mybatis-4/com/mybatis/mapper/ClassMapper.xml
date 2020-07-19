@@ -49,4 +49,19 @@
             <result property="status" column="status"/>
         </collection>
     </resultMap>
+    <!-- 向Class表中插入数据 -->
+    <!-- 一对多的数据插入 -->
+    <insert id="addClass" parameterType="Clazz">
+        <!-- 获取最后刚刚插入的自动增长的 -->
+        <selectKey keyProperty="id" resultType="int" order="AFTER">
+            select last_insert_id() as id
+        </selectKey>
+        insert into class(class_code, class_name) values(#{clazzCode}, #{clazzName})
+    </insert>
+
+    <!-- 删除数据 -->
+    <delete id="deleteClassById" parameterType="int">
+        delete from userinfo where class_id = #{id};
+        delete from class where id = #{id};
+    </delete>
 </mapper>

@@ -29,5 +29,7 @@
         <mapper resource="com/mybatis/mapper/PersonMapper.xml"/>
         <mapper resource="com/mybatis/mapper/StudentMapper.xml"/>
         <mapper resource="com/mybatis/mapper/ClassMapper.xml"/>
+        <mapper resource="com/mybatis/mapper/AdminMapper.xml"/>
+        <mapper resource="com/mybatis/mapper/FunctionsMapper.xml"/>
     </mappers>
 </configuration>

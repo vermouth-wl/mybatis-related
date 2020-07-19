@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.mapper.AdminMapper">
+    <!-- 根据管理员id查询管理员列表 -->
+    <select id="findAdminById" parameterType="int" resultMap="adminMap">
+        select * from admin where id = #{id}
+    </select>
+    <resultMap id="adminMap" type="AdminInfo">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <!-- 多对多关联映射 -->
+        <collection property="functionsList" ofType="Functions" column="id"
+                    select="com.mybatis.mapper.FunctionsMapper.findFunctionsByAid"/>
+    </resultMap>
+</mapper>
