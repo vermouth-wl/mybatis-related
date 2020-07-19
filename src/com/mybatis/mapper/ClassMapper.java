@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface ClassMapper {
     Clazz findClassStudentById(Integer id);
-    Clazz findClassStudentById2(Integer id);
+    List<Clazz> findClassStudentById2(Integer id);
+    void addClass(Clazz clazz);
+    int deleteClassById(Integer id);
 }

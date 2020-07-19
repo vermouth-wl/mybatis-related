@@ -42,4 +42,21 @@
         <result property="regDate" column="regDate"/>
         <result property="status" column="status"/>
     </resultMap>
+    <!-- 向Student中插入数据 -->
+    <insert id="addStudents" parameterMap="addStudentsMap">
+        insert into userinfo(user_code, user_name, password, name, email, phone, address, regDate, status, class_id)
+        values(#{userCode}, #{userName}, #{password}, #{name}, #{email}, #{phone}, #{address}, #{regDate}, #{status}, #{classId.id})
+    </insert>
+    <parameterMap id="addStudentsMap" type="Student">
+        <parameter property="userCode"/>
+        <parameter property="userName"/>
+        <parameter property="password"/>
+        <parameter property="name"/>
+        <parameter property="email"/>
+        <parameter property="phone"/>
+        <parameter property="address"/>
+        <parameter property="regDate"/>
+        <parameter property="status"/>
+        <parameter property="classId.id"/>
+    </parameterMap>
 </mapper>
